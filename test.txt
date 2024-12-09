@@ -1,0 +1,6 @@
+C Это комментарий
+name is @"John Doe"
+age is 30
+numbers = [1; 2; 3; 4]
+greeting is ?(name)
+C Конец конфигурации
