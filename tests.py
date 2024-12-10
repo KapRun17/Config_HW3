@@ -1,8 +1,26 @@
 import subprocess
 import tempfile
 import unittest
+import yaml
 
 class TestYamlProcessor(unittest.TestCase):
+    def test_nested_arrays(self):
+        input_text = """
+    example is [
+    [1; 2; 3;];
+    @"This is a string";
+    42;
+    ]
+    """
+        with tempfile.NamedTemporaryFile(delete=False) as temp_output:
+            process = self.run_program(input_text, temp_output.name)
+            with open(temp_output.name, 'r', encoding='utf-8') as f:
+                output = f.read()
+            expected_output = {
+                "constants": {
+                    "example": [[1, 2, 3], "This is a string", 42]
+                }
+            }
 
     def run_program(self, input_text, output_path):
         process = subprocess.run(
@@ -69,11 +87,11 @@ items:
 
     def test_error_handling(self):
         input_text = """
-name: Invalid
+name: "Invalid
 """
         with tempfile.NamedTemporaryFile(delete=False) as temp_output:
             process = self.run_program(input_text, temp_output.name)
-            self.assertNotEqual(process.returncode, 0, msg="Программа должна завершиться с ошибкой")
+            self.assertNotEqual(process.returncode, 0, msg="РџСЂРѕРіСЂР°РјРјР° РґРѕР»Р¶РЅР° Р·Р°РІРµСЂС€РёС‚СЊСЃСЏ СЃ РѕС€РёР±РєРѕР№")
 
 if __name__ == '__main__':
     unittest.main()
