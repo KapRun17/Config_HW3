@@ -73,4 +73,4 @@ python main.py -o output.yaml < test.txt
 ```
 # 4. Результаты прогона тестов
     Результаты прогона тестов
-![Результаты прогона тестов (.png)](./img/new_tests.png)
+![Результаты прогона тестов (.png)](./img/newtests.png)
